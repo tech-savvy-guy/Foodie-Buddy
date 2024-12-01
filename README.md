@@ -2,7 +2,7 @@
 
 _This is a simple web application for a fast food ordering service built with [Next.js](https://nextjs.org) and [ShadCN UI](https://ui.shadcn.com). This application can be used as a standalone web app or a Telegram Mini App._
 
-## _Getting Started_
+## 👉🏻 _Getting Started_
 
 ### _Prerequisites_
 
@@ -34,11 +34,11 @@ npm run dev
 _Open [http://localhost:3000](http://localhost:3000) with your browser to see the application running._
 
 
-## _Using as a Telegram Mini App_
+## 👉🏻 _Using as a Telegram Mini App_
 
 _To use this application as a Telegram Mini App, follow the [documentation](https://core.telegram.org/bots/webapps)._
 
-## _Support_
+## 👉🏻 _Support_
 
 _Contributions, issues, and feature requests are welcome! ✌🏻_
 

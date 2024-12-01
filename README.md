@@ -1,4 +1,4 @@
-# Foodie Buddy Cafe
+# _Foodie Buddy Cafe_
 
 _This is a simple web application for a fast food ordering service built with [Next.js](https://nextjs.org) and [ShadCN UI](https://ui.shadcn.com). This application can be used as a standalone web app or a Telegram Mini App._
 
@@ -25,7 +25,7 @@ npm install
 
 ### _Running the Development Server_
 
-Run the development server:
+_Run the development server:_
 
 ```bash
 npm run dev
@@ -34,11 +34,11 @@ npm run dev
 _Open [http://localhost:3000](http://localhost:3000) with your browser to see the application running._
 
 
-## Using as a Telegram Mini App
+## _Using as a Telegram Mini App_
 
 _To use this application as a Telegram Mini App, follow the [documentation](https://core.telegram.org/bots/webapps)._
 
-## Support
+## _Support_
 
 _Contributions, issues, and feature requests are welcome! ✌🏻_
 

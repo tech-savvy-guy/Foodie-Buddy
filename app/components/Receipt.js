@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react';
 import { useCart } from '../contexts/CartContext'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -15,6 +16,21 @@ export default function Receipt() {
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const tax = subtotal * 0.1 // Assuming 10% tax
   const total = subtotal + tax
+
+  const [isLargeDevice, setIsLargeDevice] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeDevice(window.innerWidth >= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handlePrint = () => {
     window.print()
@@ -85,10 +101,10 @@ export default function Receipt() {
       </CardContent>
       <CardFooter className="flex justify-between no-print">
         <Button variant="outline" onClick={handlePrint}>
-          <PrinterIcon className="mr-2 h-4 w-4" /> Print
+          <PrinterIcon className="mr-2 h-4 w-4" /> {isLargeDevice ? 'Print Receipt' : 'Print'}
         </Button>
         <Button onClick={handleReturnHome}>
-          <HomeIcon className="mr-2 h-4 w-4" /> Home
+          <HomeIcon className="mr-2 h-4 w-4" /> {isLargeDevice ? 'Return to Home' : 'Home'}
         </Button>
       </CardFooter>
     </Card>

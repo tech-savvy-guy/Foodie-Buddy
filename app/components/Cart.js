@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
 import { useCart } from '../contexts/CartContext'
 import { Button } from '@/components/ui/button'
@@ -22,6 +23,21 @@ export default function Cart() {
   const closeRef = useRef(null)
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const router = useRouter()
+
+  const [isLargeDevice, setIsLargeDevice] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeDevice(window.innerWidth >= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleAdd = (product) => {
     addToCart(product)
@@ -48,7 +64,7 @@ export default function Cart() {
           )}
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="fixed inset-x-0 bottom-0 h-[85vh] w-full max-w-[72rem] mx-auto rounded-t-xl">
+      <DrawerContent className="fixed inset-x-0 bottom-0 h-[75vh] w-full max-w-[72rem] mx-auto rounded-t-xl">
         <div className="w-full h-full max-w-[72rem] mx-auto flex flex-col">
           <DrawerHeader className="text-center px-4">
             <DrawerTitle className="text-xl">Your Cart</DrawerTitle>
@@ -82,29 +98,36 @@ export default function Cart() {
                   </div>
                 </div>
               ))}
-              {cart.length === 0 && (
-                <div className="flex items-center justify-center">
-                  <tgs-player
-                    autoplay
-                    loop
-                    mode="normal"
-                    src='/empty.tgs'
-                    style={{ width: '100%', maxWidth: '300px', height: 'auto' }}
-                  ></tgs-player>
-                </div>
-              )}
             </div>
           </ScrollArea>
-          <DrawerFooter className="px-4 mt-auto">
-            <div className="flex justify-between items-center mb-4 pt-2 border-t border-gray-100">
-              <span className="text-sm">Total</span>
-              <span className="text-base font-semibold">${total.toFixed(2)}</span>
+          {cart.length === 0 && (
+            <div className="flex items-center justify-center w-full h-full flex-grow">
+              <tgs-player
+                autoplay
+                loop
+                mode="normal"
+                src='/empty.tgs'
+                style={{
+                  width: isLargeDevice ? '350px' : '250px',
+                  height: isLargeDevice ? '350px' : '250px',
+                }}
+              ></tgs-player>
             </div>
-            <Button className="w-full h-10 text-sm font-medium" onClick={handleCheckout}>
-              Proceed to Checkout
-            </Button>
+          )}
+          <DrawerFooter className="px-4 mt-auto">
+            {cart.length !== 0 && (
+              <div className="flex justify-between items-center mb-4 pt-2 border-t border-gray-100">
+                <span className="text-sm">Total</span>
+                <span className="text-base font-semibold">${total.toFixed(2)}</span>
+              </div>
+            )}
+            {cart.length !== 0 && (
+              <Button className="w-full h-10 text-sm font-medium" onClick={handleCheckout}>
+                Proceed to Checkout
+              </Button>
+            )}
             <DrawerClose ref={closeRef} asChild>
-              <Button variant="outline" className="w-full h-10 text-sm font-medium">
+              <Button variant={cart.length !== 0 ? "outline" : "default"} className="w-full h-10 text-sm font-medium">
                 Continue Shopping
               </Button>
             </DrawerClose>

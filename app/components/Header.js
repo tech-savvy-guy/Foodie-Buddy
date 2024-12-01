@@ -10,17 +10,35 @@ export default function Header() {
   const pathname = usePathname()
   const [currentDateTime, setCurrentDateTime] = useState('')
 
+  const [isLargeDevice, setIsLargeDevice] = useState(false);
+
   useEffect(() => {
-    const now = new Date()
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }
-    const formattedDateTime = now.toLocaleString(undefined, options)
-    setCurrentDateTime(formattedDateTime)
-  }, [])
+    const handleResize = () => {
+      setIsLargeDevice(window.innerWidth >= 768); // Adjust the breakpoint as needed
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const formattedDateTime = now.toLocaleString();
+      setCurrentDateTime(formattedDateTime);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-background border-b">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-foreground">
+        <Link href="/" className={`font-bold text-foreground ${isLargeDevice ? 'text-2xl' : 'text-xl'}`}>
           Foodie Buddy Cafe
         </Link>
         {pathname !== '/receipt' ? (
@@ -29,7 +47,7 @@ export default function Header() {
             <Cart />
           </div>
         ) : (
-          <div className="text-foreground text-sm">
+          <div className={`text-foreground ${isLargeDevice ? '' : 'text-xs'}`}>
             {currentDateTime}
           </div>
         )}

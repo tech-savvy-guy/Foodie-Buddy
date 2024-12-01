@@ -1,5 +1,7 @@
 'use client'
 
+import { useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { useCart } from '../contexts/CartContext'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,8 +19,9 @@ import { ShoppingCart, Plus, Minus } from 'lucide-react'
 
 export default function Cart() {
   const { cart, addToCart, removeFromCart } = useCart()
-
+  const closeRef = useRef(null)
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const router = useRouter()
 
   const handleAdd = (product) => {
     addToCart(product)
@@ -26,6 +29,11 @@ export default function Cart() {
 
   const handleRemove = (productId) => {
     removeFromCart(productId)
+  }
+
+  const handleCheckout = () => {
+    closeRef.current?.click()
+    router.push('/receipt')
   }
 
   return (
@@ -92,11 +100,11 @@ export default function Cart() {
               <span className="text-sm">Total</span>
               <span className="text-base font-semibold">${total.toFixed(2)}</span>
             </div>
-            <Button className="w-full h-10 text-sm font-medium">
+            <Button className="w-full h-10 text-sm font-medium" onClick={handleCheckout}>
               Proceed to Checkout
             </Button>
-            <DrawerClose asChild>
-              <Button variant="outline" className="w-full h-10 text-sm font-medium mb-1">
+            <DrawerClose ref={closeRef} asChild>
+              <Button variant="outline" className="w-full h-10 text-sm font-medium">
                 Continue Shopping
               </Button>
             </DrawerClose>

@@ -85,10 +85,10 @@ export default function Receipt() {
       </CardContent>
       <CardFooter className="flex justify-between no-print">
         <Button variant="outline" onClick={handlePrint}>
-          <PrinterIcon className="mr-2 h-4 w-4" /> Print Receipt
+          <PrinterIcon className="mr-2 h-4 w-4" /> Print
         </Button>
         <Button onClick={handleReturnHome}>
-          <HomeIcon className="mr-2 h-4 w-4" /> Return to Home
+          <HomeIcon className="mr-2 h-4 w-4" /> Home
         </Button>
       </CardFooter>
     </Card>

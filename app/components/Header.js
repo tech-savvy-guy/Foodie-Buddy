@@ -29,7 +29,7 @@ export default function Header() {
             <Cart />
           </div>
         ) : (
-          <div className="text-foreground">
+          <div className="text-foreground text-sm">
             {currentDateTime}
           </div>
         )}

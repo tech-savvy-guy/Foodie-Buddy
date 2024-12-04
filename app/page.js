@@ -1,10 +1,12 @@
-import ProductList from './components/ProductList'
+import Main from './components/Main'
 
 export default function Home() {
   return (
-    (<div>
-      <ProductList />
-    </div>)
+    (
+      <div>
+        <Main />
+      </div>
+    )
   );
 }
 

@@ -59,7 +59,7 @@ export default function SearchDrawer() {
           <Search className="h-5 w-5" />
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="fixed inset-x-0 bottom-0 w-full max-w-[72rem] mx-auto rounded-t-xl min-h-[300px] max-h-[90vh]">
+      <DrawerContent className="fixed inset-x-0 bottom-0 w-full max-w-[72rem] mx-auto rounded-t-xl min-h-[450px] max-h-[90vh]">
         <div className="w-full h-full max-w-[72rem] mx-auto flex flex-col">
           <DrawerHeader className="text-center px-4">
             <DrawerTitle className="text-xl">Search Products</DrawerTitle>

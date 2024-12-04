@@ -1,10 +1,10 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import Cart from './Cart'
-import SearchDrawer from './SearchDrawer'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import SearchDrawer from './SearchDrawer'
 
 export default function Header() {
   const pathname = usePathname()
@@ -14,10 +14,10 @@ export default function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsLargeDevice(window.innerWidth >= 768); // Adjust the breakpoint as needed
+      setIsLargeDevice(window.innerWidth >= 768);
     };
 
-    handleResize(); // Set initial value
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => {

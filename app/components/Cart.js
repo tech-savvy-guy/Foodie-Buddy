@@ -1,7 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCart } from '../contexts/CartContext'
 import { Button } from '@/components/ui/button'
@@ -9,8 +8,8 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -21,6 +20,7 @@ import { ShoppingCart, Plus, Minus } from 'lucide-react'
 export default function Cart() {
   const { cart, addToCart, removeFromCart } = useCart()
   const closeRef = useRef(null)
+  const triggerRef = useRef(null)
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const router = useRouter()
 
@@ -52,9 +52,13 @@ export default function Cart() {
     router.push('/receipt')
   }
 
+  const openDrawer = () => {
+    triggerRef.current?.click();
+  }
+
   return (
     <Drawer>
-      <DrawerTrigger asChild>
+      <DrawerTrigger ref={triggerRef} asChild>
         <Button variant="outline" size="icon" className="relative w-10 h-10">
           <ShoppingCart className="h-5 w-5" />
           {cart.length > 0 && (

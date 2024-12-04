@@ -7,7 +7,7 @@ const products = [
     { id: 6, name: 'Donut', price: 1.49, image: '/products/donut.tgs' },
     { id: 7, name: 'Popcorn', price: 1.99, image: '/products/popcorn.tgs' },
     { id: 8, name: 'Coke', price: 1.49, image: '/products/coke.tgs' },
-    { id: 9, name: 'Cake', price: 10.99, image: '/products/cake.tgs' },
+    { id: 9, name: 'Cake', price: 9.99, image: '/products/cake.tgs' },
     { id: 10, name: 'Icecream', price: 5.99, image: '/products/icecream.tgs' },
     { id: 11, name: 'Cookie', price: 3.99, image: '/products/cookie.tgs' },
     { id: 12, name: 'Flan', price: 7.99, image: '/products/flan.tgs' },

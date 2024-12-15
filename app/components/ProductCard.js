@@ -1,11 +1,15 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { useCart } from '../contexts/CartContext'
 import { Plus, Minus } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+
+import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Card, CardContent } from '@/components/ui/card'
+
+import { useCart } from '../contexts/CartContext'
+import { useTelegram } from "../contexts/TelegramContext";
+
 
 export default function ProductCard({ product }) {
   const { cart, addToCart, removeFromCart } = useCart()
@@ -13,6 +17,18 @@ export default function ProductCard({ product }) {
   const playerRef = useRef(null)
 
   const quantity = cart.find((item) => item.id === product.id)?.quantity || 0
+
+  const webApp = useTelegram();
+
+  useEffect(() => {
+    if (webApp) {
+      console.log("Telegram WebApp Details:", {
+        initData: webApp.initData,
+        version: webApp.version,
+        platform: webApp.platform,
+      });
+    }
+  }, [webApp]);
 
   useEffect(() => {
     if (!document.querySelector('script[src="/js/tgs-player.js"]')) {

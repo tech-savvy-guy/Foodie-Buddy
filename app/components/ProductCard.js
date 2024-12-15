@@ -103,11 +103,11 @@ export default function ProductCard({ product }) {
                 <Button onClick={handleAdd} size="sm" className="text-xs">Add to Cart</Button>
               ) : (
                 <div className="flex items-center space-x-1">
-                  <Button size="icon" variant="outline" onClick={handleRemove} className="h-9 w-9">
+                  <Button size="icon" variant="outline" onClick={handleRemove} className="h-8 w-8">
                     <Minus className="h-5 w-5" />
                   </Button>
                   <span className="w-6 text-center text-sm">{quantity}</span>
-                  <Button size="icon" variant="outline" onClick={handleAdd} className="h-9 w-9">
+                  <Button size="icon" variant="outline" onClick={handleAdd} className="h-8 w-8">
                     <Plus className="h-5 w-5" />
                   </Button>
                 </div>
